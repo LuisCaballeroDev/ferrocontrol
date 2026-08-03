@@ -27,7 +27,34 @@ namespace Catalog.Domain.Entities
             CreateAtUtc = DateTime.UtcNow;
         }
 
+        public void Update(string name, string? description)
+        {
+            SetName(name);
+            SetDescription(description);
+            UpdateAtUtc = DateTime.UtcNow;
+        }
 
+        public void Activate()
+        {
+            if (IsActive)
+            {
+                return;
+            }
+
+            IsActive = true;
+            UpdateAtUtc = DateTime.UtcNow;
+        }
+
+        public void Deactivate()
+        {
+            if(!IsActive)
+            {
+                return;
+            }
+
+            IsActive = false;
+            UpdateAtUtc = DateTime.UtcNow;
+        }
 
         private void SetName(string name) {
             if (string.IsNullOrEmpty(name))
