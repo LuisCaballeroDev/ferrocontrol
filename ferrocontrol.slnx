@@ -1,0 +1,6 @@
+<Solution>
+  <Project Path="src/Services/Catalog/Catalog.Api/Catalog.Api.csproj" />
+  <Project Path="src/Services/Catalog/Catalog.Application/Catalog.Application.csproj" Id="62976f10-2bb4-416b-bc00-bd61076e1c4c" />
+  <Project Path="src/Services/Catalog/Catalog.Domain/Catalog.Domain.csproj" />
+  <Project Path="src/Services/Catalog/Catalog.Infrastructure/Catalog.Infrastructure.csproj" />
+</Solution>
