@@ -1,7 +1,12 @@
-﻿namespace Catalog.Domain.Entities
+﻿using Catalog.Domain.Exceptions;
+
+namespace Catalog.Domain.Entities
 {
     public sealed class Category
     {
+        private const int MaximumNameLength = 100;
+        private const int MaximumDescriptionLength = 500;
+
         public Guid Id { get; private set; }
         public string Name { get; private set; }
         public string? Description { get; private set; }
@@ -16,11 +21,47 @@
         public Category(string name, string? description)
         {
             Id = Guid.NewGuid();
-            Name = name;
-            Description = description;
+            SetName(name);
+            SetDescription(description);
             IsActive = true;
             CreateAtUtc = DateTime.UtcNow;
         }
 
+
+
+        private void SetName(string name) {
+            if (string.IsNullOrEmpty(name))
+            {
+                throw new DomainException(
+                    "El nombre de la categoría es obligatorio.");
+            }
+
+            var normalizedName = name.Trim();
+            if(normalizedName.Length > MaximumNameLength)
+            {
+                throw new DomainException(
+                    $"El nombre de la categoría no puede exceder {MaximumNameLength} caracteres.");
+            }
+
+            Name = normalizedName;
+
+        }
+
+        private void SetDescription(string? description)
+        {
+            if (string.IsNullOrWhiteSpace(description))
+            {
+                Description = null;
+                return;
+            }
+
+            var normalizedDescription = description.Trim();
+            if(normalizedDescription.Length > MaximumDescriptionLength)
+            {
+                throw new DomainException(
+                    $"La descripción de la categoría no puede exceder {MaximumDescriptionLength} caracteres.");
+            }
+            Description = normalizedDescription;
+        }
     }
 }
