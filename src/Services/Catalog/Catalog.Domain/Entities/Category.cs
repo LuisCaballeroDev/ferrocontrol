@@ -11,8 +11,8 @@ namespace Catalog.Domain.Entities
         public string Name { get; private set; }
         public string? Description { get; private set; }
         public bool IsActive { get; private set; }
-        public DateTime CreateAtUtc { get; private set; } 
-        public DateTime? UpdateAtUtc { get; private set; }
+        public DateTime CreatedAtUtc { get; private set; } 
+        public DateTime? UpdatedAtUtc { get; private set; }
 
         private Category() {
             Name = string.Empty;
@@ -24,14 +24,14 @@ namespace Catalog.Domain.Entities
             SetName(name);
             SetDescription(description);
             IsActive = true;
-            CreateAtUtc = DateTime.UtcNow;
+            CreatedAtUtc = DateTime.UtcNow;
         }
 
         public void Update(string name, string? description)
         {
             SetName(name);
             SetDescription(description);
-            UpdateAtUtc = DateTime.UtcNow;
+            UpdatedAtUtc = DateTime.UtcNow;
         }
 
         public void Activate()
@@ -42,7 +42,7 @@ namespace Catalog.Domain.Entities
             }
 
             IsActive = true;
-            UpdateAtUtc = DateTime.UtcNow;
+            UpdatedAtUtc = DateTime.UtcNow;
         }
 
         public void Deactivate()
@@ -53,7 +53,7 @@ namespace Catalog.Domain.Entities
             }
 
             IsActive = false;
-            UpdateAtUtc = DateTime.UtcNow;
+            UpdatedAtUtc = DateTime.UtcNow;
         }
 
         private void SetName(string name) {
